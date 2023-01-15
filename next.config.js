@@ -21,7 +21,7 @@ module.exports = {
           { key: "Access-Control-Allow-Credentials", value: "true" },
           {
             key: "Access-Control-Allow-Origin",
-            value: "*",
+            value: "http://localhost:3001",
           },
           { key: "Access-Control-Allow-Methods", value: "GET,POST" },
           { key: "Access-Control-Allow-Headers", value: headers.join(", ") },

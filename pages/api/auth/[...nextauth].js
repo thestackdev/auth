@@ -34,7 +34,8 @@ export default NextAuth({
     strategy: "jwt",
   },
   callbacks: {
-    async redirect({ url }) {
+    async redirect({ url, baseUrl }) {
+      console.log(url);
       return url;
     },
   },

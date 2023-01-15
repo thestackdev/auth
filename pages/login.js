@@ -21,6 +21,7 @@ export default function Login() {
 
   useEffect(() => {
     if (redirectUrl === null || callbackUrl === null) return;
+    console.log(redirectUrl, callbackUrl);
     setUrlState({ redirectUrl, callbackUrl });
   }, [redirectUrl, callbackUrl]);
 
