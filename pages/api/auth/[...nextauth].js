@@ -35,19 +35,25 @@ export default NextAuth({
   },
   callbacks: {
     async redirect({ url, baseUrl }) {
-      console.log(url);
       return url;
+    },
+    async session({ session, token, user }) {
+      session.user._id = token.sub;
+      return session;
     },
   },
   cookies: {
     sessionToken: {
       name: `__Secure-next-auth.session-token`,
       options: {
-        domain: "fullstacklab.org",
+        domain:
+          process.env.NODE_ENV === "production"
+            ? "fullstacklab.org"
+            : "localhost",
         httpOnly: true,
         sameSite: "lax",
         path: "/",
-        secure: true,
+        secure: process.env.NODE_ENV === "production" ? true : false,
       },
     },
   },
