@@ -38,10 +38,6 @@ export default NextAuth({
     async redirect({ url, baseUrl }) {
       return url;
     },
-    async session({ session, token, user }) {
-      session.user._id = token.sub;
-      return session;
-    },
   },
   cookies: {
     sessionToken: {
