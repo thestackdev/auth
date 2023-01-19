@@ -1,0 +1,50 @@
+kind: pipeline
+type: exec
+name: default
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+  - name: deploy
+    environment:
+      MONGODB_URI:
+        from_secret: MONGODB_URI
+      EMAIL_SERVER_USER:
+        from_secret: EMAIL_SERVER_USER
+      EMAIL_SERVER_PASSWORD:
+        from_secret: EMAIL_SERVER_PASSWORD
+      EMAIL_SERVER_HOST:
+        from_secret: EMAIL_SERVER_HOST
+      EMAIL_SERVER_PORT:
+        from_secret: EMAIL_SERVER_PORT
+      EMAIL_FROM:
+        from_secret: EMAIL_FROM
+      NEXTAUTH_URL:
+        from_secret: NEXTAUTH_URL
+      NEXTAUTH_SECRET:
+        from_secret: NEXTAUTH_SECRET
+      GITHUB_ID:
+        from_secret: GITHUB_ID
+      GITHUB_SECRET:
+        from_secret: GITHUB_SECRET
+      GOOGLE_CLIENT_ID:
+        from_secret: GOOGLE_CLIENT_ID
+      GOOGLE_CLIENT_SECRET:
+        from_secret: GOOGLE_CLIENT_SECRET
+    commands:
+      - echo MONGODB_URI=$MONGODB_URI >> .env
+      - echo EMAIL_SERVER_USER=$EMAIL_SERVER_USER >> .env
+      - echo EMAIL_SERVER_PASSWORD=$EMAIL_SERVER_PASSWORD >> .env
+      - echo EMAIL_SERVER_HOST=$EMAIL_SERVER_HOST >> .env
+      - echo EMAIL_SERVER_PORT=$EMAIL_SERVER_PORT >> .env
+      - echo EMAIL_FROM=$EMAIL_FROM >> .env
+      - echo NEXTAUTH_URL=$NEXTAUTH_URL >> .env
+      - echo NEXTAUTH_SECRET=$NEXTAUTH_SECRET >> .env
+      - echo GITHUB_ID=$GITHUB_ID >> .env
+      - echo GITHUB_SECRET=$GITHUB_SECRET >> .env
+      - echo GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID >> .env
+      - echo GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET >> .env
+      - docker compose up -d --build --force-recreate
+      - docker system prune -f -a

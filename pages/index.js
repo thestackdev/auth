@@ -7,14 +7,12 @@ export default function Home() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  console.log(session);
-
   useEffect(() => {
     if (status === "loading") return;
-    if (!session) router.push("/login");
+    if (!session.user) router.push("/login");
   }, [session, status]);
 
-  if (status === "loading")
+  if (status === "loading" || !session.user)
     return (
       <div className="h-screen w-full flex items-center justify-center">
         <Spinner />
