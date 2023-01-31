@@ -12,7 +12,6 @@ const headers = [
 
 module.exports = {
   reactStrictMode: true,
-  output: "standalone",
   async headers() {
     return [
       {
