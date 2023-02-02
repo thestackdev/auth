@@ -39,21 +39,21 @@ export default NextAuth({
       return url;
     },
   },
-  // cookies: {
-  //   sessionToken: {
-  //     name: `__Secure-next-auth.session-token`,
-  //     options: {
-  //       domain:
-  //         process.env.NODE_ENV === "production"
-  //           ? "fullstacklab.org"
-  //           : "localhost",
-  //       httpOnly: true,
-  //       sameSite: "lax",
-  //       path: "/",
-  //       secure: process.env.NODE_ENV === "production" ? true : false,
-  //     },
-  //   },
-  // },
+  cookies: {
+    sessionToken: {
+      name: `__Secure-next-auth.session-token`,
+      options: {
+        domain:
+          process.env.NODE_ENV === "production"
+            ? "fullstacklab.org"
+            : "localhost",
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production" ? true : false,
+      },
+    },
+  },
   pages: {
     signIn: "/login",
     error: "/error",
