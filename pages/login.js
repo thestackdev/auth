@@ -1,5 +1,5 @@
 import Spinner from "components/Spinner";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -23,7 +23,6 @@ export default function Login() {
     });
     if (e.target.id === "email") router.push(response.url);
   }
-
   if (status === "loading") return <Spinner />;
 
   return (
