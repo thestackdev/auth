@@ -1,8 +1,9 @@
-import React from "react";
-
 export default function Spinner() {
   return (
-    <div role="status">
+    <div
+      className="h-screen w-full flex items-center justify-center"
+      role="status"
+    >
       <svg
         aria-hidden="true"
         className="inline w-10 h-10 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"

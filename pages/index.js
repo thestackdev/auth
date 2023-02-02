@@ -1,23 +1,7 @@
-import { useEffect } from "react";
-import { useSession, signOut } from "next-auth/react";
-import { useRouter } from "next/router";
-import Spinner from "@/components/spinner";
+import { signOut, useSession } from "next-auth/react";
 
 export default function Home() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (status === "loading") return;
-    if (!session.user) router.push("/login");
-  }, [session, status]);
-
-  if (status === "loading" || !session.user)
-    return (
-      <div className="h-screen w-full flex items-center justify-center">
-        <Spinner />
-      </div>
-    );
+  const { data: session } = useSession();
 
   return (
     <div className="flex flex-col items-center justify-center h-screen w-full gap-4">

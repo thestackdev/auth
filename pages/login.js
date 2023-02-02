@@ -1,5 +1,5 @@
-import Spinner from "@/components/spinner";
-import { useSession, signIn } from "next-auth/react";
+import Spinner from "components/Spinner";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -21,7 +21,6 @@ export default function Login() {
 
   useEffect(() => {
     if (redirectUrl === null || callbackUrl === null) return;
-    console.log(redirectUrl, callbackUrl);
     setUrlState({ redirectUrl, callbackUrl });
   }, [redirectUrl, callbackUrl]);
 
@@ -37,12 +36,7 @@ export default function Login() {
     if (e.target.id === "email") router.push(response.url);
   }
 
-  if (status === "loading")
-    return (
-      <div className="h-screen w-full flex items-center justify-center">
-        <Spinner />
-      </div>
-    );
+  if (status === "loading") return <Spinner />;
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">

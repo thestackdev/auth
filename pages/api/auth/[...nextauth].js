@@ -1,6 +1,6 @@
-import NextAuth from "next-auth";
-import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import clientPromise from "@/lib/mongodb";
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
+import NextAuth from "next-auth";
 import EmailProvider from "next-auth/providers/email";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
@@ -39,21 +39,21 @@ export default NextAuth({
       return url;
     },
   },
-  cookies: {
-    sessionToken: {
-      name: `__Secure-next-auth.session-token`,
-      options: {
-        domain:
-          process.env.NODE_ENV === "production"
-            ? "fullstacklab.org"
-            : "localhost",
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: process.env.NODE_ENV === "production" ? true : false,
-      },
-    },
-  },
+  // cookies: {
+  //   sessionToken: {
+  //     name: `__Secure-next-auth.session-token`,
+  //     options: {
+  //       domain:
+  //         process.env.NODE_ENV === "production"
+  //           ? "fullstacklab.org"
+  //           : "localhost",
+  //       httpOnly: true,
+  //       sameSite: "lax",
+  //       path: "/",
+  //       secure: process.env.NODE_ENV === "production" ? true : false,
+  //     },
+  //   },
+  // },
   pages: {
     signIn: "/login",
     error: "/error",
