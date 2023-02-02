@@ -1,5 +1,5 @@
 import Spinner from "components/Spinner";
-import { signIn, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -8,30 +8,18 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const { redirectUrl, callbackUrl } = router.query;
-  const [urlState, setUrlState] = useState({
-    redirectUrl: null,
-    callbackUrl: null,
-  });
+  const { callbackUrl } = router.query;
 
   useEffect(() => {
     if (status === "loading") return;
     if (session) router.push("/");
   }, [session, status]);
 
-  useEffect(() => {
-    if (redirectUrl === null || callbackUrl === null) return;
-    setUrlState({ redirectUrl, callbackUrl });
-  }, [redirectUrl, callbackUrl]);
-
   async function handleLogin(e) {
     setLoading(true);
     const response = await signIn(e.target.id, {
       email,
-      callbackUrl: urlState.redirectUrl
-        ? `${urlState.redirectUrl}${urlState.callbackUrl}`
-        : "/",
-      redirect: false,
+      callbackUrl: callbackUrl,
     });
     if (e.target.id === "email") router.push(response.url);
   }
