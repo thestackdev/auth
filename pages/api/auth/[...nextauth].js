@@ -1,16 +1,16 @@
-import clientPromise from "@/lib/mongodb";
-import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
-import NextAuth from "next-auth";
-import EmailProvider from "next-auth/providers/email";
-import GitHubProvider from "next-auth/providers/github";
-import GoogleProvider from "next-auth/providers/google";
+import { MongoDBAdapter } from '@next-auth/mongodb-adapter'
+import clientPromise from 'lib/mongodb'
+import NextAuth from 'next-auth'
+import EmailProvider from 'next-auth/providers/email'
+import GitHubProvider from 'next-auth/providers/github'
+import GoogleProvider from 'next-auth/providers/google'
 
-const production = process.env.NODE_ENV === "production";
+const production = process.env.NODE_ENV === 'production'
 
 export default NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
   adapter: MongoDBAdapter(clientPromise, {
-    databaseName: "auth",
+    databaseName: 'auth',
   }),
   providers: [
     EmailProvider({
@@ -34,27 +34,27 @@ export default NextAuth({
     }),
   ],
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
   },
   callbacks: {
     async redirect({ url }) {
-      return url;
+      return url
     },
   },
   cookies: {
     sessionToken: {
-      name: `${production && "__Secure-"}next-auth.session-token`,
+      name: `${production && '__Secure-'}next-auth.session-token`,
       options: {
-        domain: production ? "fullstacklab.org" : "localhost",
+        domain: production ? 'fullstacklab.org' : 'localhost',
         httpOnly: true,
-        sameSite: "lax",
-        path: "/",
+        sameSite: 'lax',
+        path: '/',
         secure: production ? true : false,
       },
     },
   },
   pages: {
-    signIn: "/login",
-    error: "/error",
+    signIn: '/login',
+    error: '/error',
   },
-});
+})
