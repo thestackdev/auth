@@ -1,17 +1,17 @@
-// import { getToken } from 'next-auth/jwt'
 import clientPromise from 'lib/mongodb'
 import { ObjectId } from 'mongodb'
+import { getToken } from 'next-auth/jwt'
 
 export default async function (req, res) {
   const client = await clientPromise
   const usersCollection = client.db('auth').collection('users')
 
-  // const token = await getToken({ req })
+  const token = await getToken({ req })
 
-  // if (!token) {
-  //   res.status(401).json({ message: 'Unauthorized' })
-  //   return
-  // }
+  if (!token) {
+    res.status(401).json({ message: 'Unauthorized' })
+    return
+  }
 
   switch (req.method) {
     case 'POST':
