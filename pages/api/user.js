@@ -1,5 +1,4 @@
 import clientPromise from 'lib/mongodb'
-import { ObjectId } from 'mongodb'
 import { getToken } from 'next-auth/jwt'
 
 export default async function (req, res) {
@@ -16,10 +15,7 @@ export default async function (req, res) {
   switch (req.method) {
     case 'POST':
       const { name } = req.body
-      await usersCollection.updateOne(
-        { _id: new ObjectId('63dbe27add437f32d1062e72') },
-        { $set: { name } }
-      )
+      await usersCollection.updateOne({ _id: token.sub }, { $set: { name } })
 
       res.status(201).send('ok')
       break
