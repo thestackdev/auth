@@ -43,7 +43,7 @@ export default NextAuth({
   },
   cookies: {
     sessionToken: {
-      name: `${production && '__Secure-'}next-auth.session-token`,
+      name: `${production ? '__Secure-' : ''}next-auth.session-token`,
       options: {
         domain: production ? 'fullstacklab.org' : 'localhost',
         httpOnly: true,
